@@ -35,6 +35,6 @@ public class CustomPhysics
 
     public void UpdatePhysics()
     {
-        _transform.Translate(_direction.normalized * _speed * CustomUpdateManager.Instance.CustomUpdateGameplay.GetDeltaTime);
+        _transform.Translate(_direction.normalized * _speed * Time.deltaTime);
     }
 }
