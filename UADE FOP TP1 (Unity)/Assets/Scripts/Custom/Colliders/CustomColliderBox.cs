@@ -22,7 +22,6 @@ public class CustomColliderBox : CustomColliderBase
     {
         _other = other;
 
-
         if (_other is CustomColliderBox otherColliderBox)
         {
             if (CheckCollisionWithBox(otherColliderBox))
