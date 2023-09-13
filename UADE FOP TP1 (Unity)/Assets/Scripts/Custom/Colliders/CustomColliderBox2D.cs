@@ -5,57 +5,33 @@ using UnityEngine;
 [System.Serializable]
 public class CustomColliderBox2D : CustomColliderBase
 {
-    private Vector2 _halfLocalScale;
-
     // Cache other collider.
     private ICollider _otherCollider;
-
-    public CustomColliderBox2D(Transform transform)
-    {
-        Transform = transform;
-        _halfLocalScale = Transform.localScale / 2f;
-    }
 
     // Check Collision with Others.
     public override bool CheckCollision(ICollider other)
     {
         _otherCollider = other;
 
-        if (_otherCollider is CustomColliderBox2D otherColliderBox)
+        switch (_otherCollider)
         {
-            if (CheckCollisionWithBox(otherColliderBox))
-            {
+            // Other Collider Box.
+            case CustomColliderBox2D otherColliderBox:
+                if (!CollisionBoxBox(this, otherColliderBox)) return false;
+                
                 ResolveCollision(otherColliderBox);
                 return true;
-            }
+            
+            // Other Collider Sphere.
+            case CustomColliderCircle2D otherColliderSphere:
+                if (!CheckCollisionWithSphere(otherColliderSphere)) return false;
+
+                //ResolveCollision(otherColliderSphere);
+                return true;
+
+            default:
+                return false;
         }
-
-        else if (_otherCollider is CustomColliderCircle2D otherColliderSphere)
-        {
-            // Check if is not colliding with the sphere, and return.
-            if (!CheckCollisionWithSphere(otherColliderSphere)) return false;
-
-            // If is colliding with sphere continue.
-            CalculateCollisionNormal(otherColliderSphere);
-            //ResolveCollision(otherColliderSphere);
-            return true;
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    /// Check if Box Collider is Overlapping.
-    /// </summary>
-    /// <param name="otherColliderBox2D">Collider of the other object</param>
-    /// <returns></returns>
-    private bool CheckCollisionWithBox(CustomColliderBox2D otherColliderBox2D)
-    {
-        Vector2 halfOtherLocalScale = otherColliderBox2D.Transform.localScale / 2f;
-        return (Transform.localPosition.x - _halfLocalScale.x < otherColliderBox2D.Transform.localPosition.x + halfOtherLocalScale.x &&
-                Transform.localPosition.x + _halfLocalScale.x > otherColliderBox2D.Transform.localPosition.x - halfOtherLocalScale.x &&
-                Transform.localPosition.y - _halfLocalScale.y < otherColliderBox2D.Transform.localPosition.y + halfOtherLocalScale.y &&
-                Transform.localPosition.y + _halfLocalScale.y > otherColliderBox2D.Transform.localPosition.y - halfOtherLocalScale.y );
     }
 
     /// <summary>

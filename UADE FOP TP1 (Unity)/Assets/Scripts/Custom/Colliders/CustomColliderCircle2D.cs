@@ -11,12 +11,7 @@ public class CustomColliderCircle2D : CustomColliderBase
     
     // Cache other collider.
     private ICollider _otherCollider;
-
-    public CustomColliderCircle2D(Transform transform)
-    {
-        Transform = transform;
-    }
-
+    
     public override bool CheckCollision(ICollider other)
     {
         if (other is CustomColliderBox2D boxCollider)
@@ -27,8 +22,7 @@ public class CustomColliderCircle2D : CustomColliderBase
 
         else if (other is CustomColliderCircle2D sphereCollider)
         {
-            // Check collision between two sphere colliders
-            // Implement collision logic for sphere colliders
+            if (!CollisionCircleCircle(this, sphereCollider)) return false;
         }
 
         return false;
