@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CustomColliderBase : ICollider
+public abstract class CustomColliderBase : MonoBehaviour, ICollider
 {
-    // Common properties and methods for all colliders
+    [SerializeField] private Transform _transform;
+    
     public abstract bool CheckCollision(ICollider other);
 
     protected abstract void DrawGizmo();
@@ -16,5 +17,11 @@ public abstract class CustomColliderBase : ICollider
 
         // Draw the collider shape gizmo
         DrawGizmo();
+    }
+    
+    public Transform Transform
+    {
+        get { return _transform; }
+        set { _transform = value; }
     }
 }

@@ -4,26 +4,28 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class CustomColliderSphere : CustomColliderBase
+public class CustomColliderCircle2D : CustomColliderBase
 {
-    [SerializeField] public Transform _transform;
     [SerializeField] public float Radius = 0.5f;
     [SerializeField] public Vector2 CollisionNormal;
+    
+    // Cache other collider.
+    private ICollider _otherCollider;
 
-    public CustomColliderSphere(Transform transform)
+    public CustomColliderCircle2D(Transform transform)
     {
-        _transform = transform;
+        Transform = transform;
     }
 
     public override bool CheckCollision(ICollider other)
     {
-        if (other is CustomColliderBox boxCollider)
+        if (other is CustomColliderBox2D boxCollider)
         {
             // Check collision between a sphere collider and a box collider
             // Implement collision logic between sphere and box colliders
         }
 
-        else if (other is CustomColliderSphere sphereCollider)
+        else if (other is CustomColliderCircle2D sphereCollider)
         {
             // Check collision between two sphere colliders
             // Implement collision logic for sphere colliders
@@ -35,7 +37,7 @@ public class CustomColliderSphere : CustomColliderBase
     protected override void DrawGizmo()
     {
         // Get the center position of the collider
-        var center = _transform.position;
+        var center = Transform.position;
 
         // Draw the wire sphere representing the sphere collider
         Gizmos.DrawWireSphere(center, Radius);
