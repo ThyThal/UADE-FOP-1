@@ -6,6 +6,8 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
 {
     [SerializeField] private Transform _transform;
     private Vector2 _halfLocalScale;
+
+    public Color GyzmoColor = Color.yellow;
     
     public abstract bool CheckCollision(ICollider other);
 
@@ -14,7 +16,7 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
     protected virtual void OnDrawGizmos()
     {
         // Set the gizmo color
-        Gizmos.color = Color.yellow;
+        Gizmos.color = GyzmoColor;
 
         // Draw the collider shape gizmo
         DrawGizmo();
@@ -24,6 +26,11 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
     {
         get { return _transform; }
         set { _transform = value; }
+    }
+
+    public Vector2 Position2D
+    {
+        get { return new Vector2(_transform.position.x, _transform.position.y); }
     }
 
     public Vector2 HalfScale => Transform.localScale / 2f;

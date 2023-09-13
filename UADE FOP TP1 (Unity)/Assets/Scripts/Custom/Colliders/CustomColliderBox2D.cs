@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class CustomColliderBox2D : CustomColliderBase
 {
     // Cache other collider.
@@ -19,7 +16,10 @@ public class CustomColliderBox2D : CustomColliderBase
             case CustomColliderBox2D otherColliderBox:
                 if (!CollisionBoxBox(this, otherColliderBox)) return false;
                 
-                ResolveCollision(otherColliderBox);
+                GyzmoColor = Color.cyan;
+                otherColliderBox.GyzmoColor = Color.green;
+                
+                ResolveBoxCollision(otherColliderBox);
                 return true;
             
             // Other Collider Sphere.
@@ -30,6 +30,7 @@ public class CustomColliderBox2D : CustomColliderBase
                 return true;
 
             default:
+                GyzmoColor = Color.red;
                 return false;
         }
     }
@@ -51,29 +52,7 @@ public class CustomColliderBox2D : CustomColliderBase
 
         return distance <= circle2DCollider.Radius;
     }
-
-    /// <summary>
-    /// Calculate the normal for Sphere Reflection.
-    /// </summary>
-    private void CalculateCollisionNormal(CustomColliderCircle2D circle2DCollider)
-    {
-        circle2DCollider.CollisionNormal = CalculateBoxSphereCollisionNormal(this, circle2DCollider);
-    }
-
-    /// <summary>
-    /// Calculates the normal between a Box and a Sphere.
-    /// </summary>
-    /// <returns>Normal of the Collision Point</returns>
-    private Vector2 CalculateBoxSphereCollisionNormal(CustomColliderBox2D box2DCollider, CustomColliderCircle2D circle2DCollider)
-    {
-        Vector2 sphereCenter = circle2DCollider.Transform.position;
-        Vector2 closestPoint = GetClosestPointOnBox(box2DCollider, sphereCenter);
-        Vector2 collisionNormal = sphereCenter - closestPoint;
-        collisionNormal.Normalize();
-
-        return collisionNormal;
-    }
-
+    
     private Vector2 GetClosestPointOnBox(CustomColliderBox2D box2DCollider, Vector2 point)
     {
         Vector2 boxCenter = box2DCollider.Transform.position;
@@ -90,7 +69,7 @@ public class CustomColliderBox2D : CustomColliderBase
         return closestPoint;
     }
 
-    private void ResolveCollision(CustomColliderBox2D otherColliderBox2D)
+    private void ResolveBoxCollision(CustomColliderBox2D otherColliderBox2D)
     {
         Vector2 collisionNormal = Transform.position - otherColliderBox2D.Transform.position;
         float penetrationDepth = Mathf.Abs(Transform.position.x - otherColliderBox2D.Transform.position.x) - (Transform.localScale.x + otherColliderBox2D.Transform.localScale.x) / 2;
@@ -99,20 +78,6 @@ public class CustomColliderBox2D : CustomColliderBase
         Vector3 correction = new Vector3(separationDistance * collisionNormal.x, 0, 0);
 
         Transform.position -= correction;
-        //otherColliderBox._transform.position -= correction;
-    }
-
-    private void ResolveCollision(CustomColliderCircle2D otherColliderCircle2D)
-    {
-        /*Vector2 collisionNormal = _transform.position - otherColliderSphere._transform.position;
-        float penetrationDepth = Mathf.Abs(_transform.position.x - otherColliderSphere._transform.position.x) - (_transform.localScale.x + otherColliderSphere.Radius) / 2;
-
-        float separationDistance = penetrationDepth + 0.001f;
-        Vector3 correction = new Vector3(separationDistance * collisionNormal.x, separationDistance * collisionNormal.y, 0);
-
-        _transform.position += correction;
-        otherColliderSphere._transform.position -= correction;
-        */
     }
 
     protected override void DrawGizmo()
