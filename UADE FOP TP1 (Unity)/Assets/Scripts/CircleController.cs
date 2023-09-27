@@ -7,11 +7,12 @@ public class CircleController : MonoBehaviour
 {
     [SerializeField] private CustomColliderBase _customCollider;
     [SerializeField] private CustomColliderBase _otherCollider;
-    
+    public impulseforce fisicas;
+    public float speed = 10f;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,5 +20,19 @@ public class CircleController : MonoBehaviour
     {
         _customCollider.GyzmoColor = Color.blue;
         _customCollider.CheckCollision(_otherCollider);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 direction = new Vector2(horizontalInput, verticalInput);
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            fisicas.CustomAddForce(Vector2.right);
+
+        }
+
+        if (direction.x != 0 || direction.y != 0)
+        {
+            fisicas.CustomAddForce(direction.normalized * speed);
+
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CustomColliderBox2D))]
+//[RequireComponent(typeof(CustomColliderBox2D))]
 public class SquareController : MonoBehaviour
 {
     [SerializeField] private CustomColliderBase _customCollider;
