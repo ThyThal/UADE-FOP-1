@@ -21,19 +21,22 @@ public class SquareController : MonoBehaviour
     {
         _customCollider.GyzmoColor = Color.blue;
         _customCollider.CheckCollision(_otherCollider);
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             fisicas.CustomAddForce(Vector2.right);
-            
+            Debug.Log("aca");
         }
 
         if(direction.x != 0 || direction.y != 0)
         {
             fisicas.CustomAddForce(direction.normalized * speed);
-        
+            Debug.Log("2");
         }
     }
 }

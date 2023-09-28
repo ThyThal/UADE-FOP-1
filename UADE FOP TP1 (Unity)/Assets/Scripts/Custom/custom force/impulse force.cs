@@ -5,7 +5,7 @@ public class impulseforce : MonoBehaviour
    
     public float mass = 1;
     public Vector2 velocity;
-    //public int añadirFuerza = velocity * masa;
+    //public int añadirFuerza;
 
     public float gravityScale = 0.0f;
 
@@ -16,6 +16,7 @@ public class impulseforce : MonoBehaviour
         // Update the position based on the velocity
         transform.position += (Vector3)velocity * Time.fixedDeltaTime;
         velocity = Vector2.zero;
+        
     }   
 
     public void CustomAddForce(Vector2 force)
@@ -24,7 +25,7 @@ public class impulseforce : MonoBehaviour
         Vector2 acceleration = force / mass;
         // Update velocity using the calculated acceleration
         velocity += acceleration * Time.fixedDeltaTime;
-
+        
     }
     public void CustomAddImpulse(Vector2 impulse)
     {
