@@ -3,40 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(CustomColliderBox2D))]
-public class SquareController : MonoBehaviour
+[RequireComponent(typeof(CustomColliderBox2D))]
+[RequireComponent(typeof(Fisicas))]
+public class SquareController : CustomMonoBehaviour
 {
-    [SerializeField] private CustomColliderBase _customCollider;
-    [SerializeField] private CustomColliderBase _otherCollider;
-    public impulseforce fisicas;
+    public Fisicas fisicas;
+    public bool player = false;
     public float speed = 10f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        _customCollider.GyzmoColor = Color.blue;
-        _customCollider.CheckCollision(_otherCollider);
+        CustomCollider.GyzmoColor = Color.blue;
+        GameManager.Instance.CheckCollisions(CustomCollider);
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            fisicas.CustomAddForce(Vector2.right);
-            Debug.Log("aca");
+        if (!player) return;
+
+        if (direction == Vector2.zero) 
+        { 
+            fisicas.Stop(); 
         }
 
-        if(direction.x != 0 || direction.y != 0)
+        else if (direction.x != 0 || direction.y != 0)
         {
             fisicas.CustomAddForce(direction.normalized * speed);
-            Debug.Log("2");
+
         }
     }
 }
