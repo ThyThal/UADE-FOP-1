@@ -14,8 +14,11 @@ public class SquareController : CustomMonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CustomCollider.GyzmoColor = Color.blue;
-        GameManager.Instance.CheckCollisions(CustomCollider);
+        //CustomCollider.GyzmoColor = Color.blue;
+        if (!Static)
+        {
+            GameManager.Instance.CheckCollisions(CustomCollider);
+        }
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");

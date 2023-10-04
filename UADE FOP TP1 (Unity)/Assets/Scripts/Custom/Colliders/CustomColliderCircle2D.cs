@@ -15,26 +15,21 @@ public class CustomColliderCircle2D : CustomColliderBase
         switch (other)
         {
             case CustomColliderBox2D boxCollider:
-
-                if(!CollisionCircleBox(this,boxCollider)) return false;
-                GyzmoColor = Color.cyan;
-                //boxCollider.GyzmoColor = Color.green;
-
-                return true;
-
-            case CustomColliderCircle2D otherColliderCircle:
-                if (!CollisionCircleCircle(this, otherColliderCircle))
+                if (!CollisionCircleBox(this, boxCollider))
                 {
-                    GyzmoColor = Color.cyan;
-                    otherColliderCircle.GyzmoColor = Color.cyan;
+                    boxCollider.GyzmoColor = Color.cyan;
                     return false;
                 }
 
-                    
-                
                 GyzmoColor = Color.green;
-                otherColliderCircle.GyzmoColor = Color.green;
+                boxCollider.GyzmoColor = Color.magenta;
+                return true;
 
+            case CustomColliderCircle2D otherColliderCircle:
+                if (!CollisionCircleCircle(this, otherColliderCircle)) return false;
+
+                GyzmoColor = Color.green;
+                otherColliderCircle.GyzmoColor = Color.red;
                 ResolveCircleCollision(otherColliderCircle);
                 return true;
             
@@ -52,7 +47,7 @@ public class CustomColliderCircle2D : CustomColliderBase
         // Draw the wire sphere representing the sphere collider
         Gizmos.DrawWireSphere(center, Radius);
     }
-    
+
     public void ResolveCircleCollision(CustomColliderCircle2D other)
     {
         // Calculate the vector between the centers of the two circles

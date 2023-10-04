@@ -14,19 +14,20 @@ public class CustomColliderBox2D : CustomColliderBase
         {
             // Other Collider Box.
             case CustomColliderBox2D otherColliderBox:
-                if (!CollisionBoxBox(this, otherColliderBox)) return false;
-                
-                GyzmoColor = Color.cyan;
-                //otherColliderBox.GyzmoColor = Color.green;
-                
-                ResolveBoxCollision(otherColliderBox);
+                if (!CollisionBoxBox(this, otherColliderBox))
+                {
+                    return false;
+                }
+
                 return true;
             
             // Other Collider Sphere.
             case CustomColliderCircle2D otherColliderSphere:
-                if (!CheckCollisionWithSphere(otherColliderSphere)) return false;
+                if (!CheckCollisionWithSphere(otherColliderSphere))
+                {
+                    return false;
+                }
 
-                //ResolveCollision(otherColliderSphere);
                 return true;
 
             default:

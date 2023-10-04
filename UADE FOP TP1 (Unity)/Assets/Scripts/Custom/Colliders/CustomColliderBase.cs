@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,14 +7,14 @@ using UnityEngine;
 public abstract class CustomColliderBase : MonoBehaviour, ICollider
 {
     [SerializeField] private Transform _transform;
+    [SerializeField] private SpriteRenderer _renderer;
     private Vector2 _halfLocalScale;
 
     public Color GyzmoColor = Color.yellow;
-    
+
     public abstract bool CheckCollision(ICollider other);
 
     protected abstract void DrawGizmo();
-
     protected virtual void OnDrawGizmos()
     {
         // Set the gizmo color
@@ -64,23 +65,19 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
 
     protected bool CollisionCircleBox(CustomColliderCircle2D self, CustomColliderBox2D other)
     {
-        //Calculate the distance between the circle's center and the square's center
-       
+        // Check collision between circle and box
+        float closestX = Mathf.Clamp(Transform.position.x, other.Transform.position.x - other.HalfScale.x, other.Transform.position.x + other.HalfScale.x);
+        float closestY = Mathf.Clamp(Transform.position.y, other.Transform.position.y - other.HalfScale.y, other.Transform.position.y + other.HalfScale.y);
 
-        float dx = transform.position.x - other.transform.position.x;
-        float dy = transform.position.y - other.transform.position.y;
+        Vector2 closestPoint = new Vector2(closestX, closestY);
+        float distance = Vector2.Distance(Transform.position, closestPoint);
 
-
-
-        // Calculate the squared distance
-        float distanceSquared = (dx * dx) + (dy * dy);
-
-        // Check if the squared distance is less than the squared sum of the radii
-        float combinedRadius = self.Radius + other.transform.localScale.x / 2f; // Assuming square is oriented as a diamond
-        float combinedRadiusSquared = combinedRadius * combinedRadius;
-
-        return distanceSquared < combinedRadiusSquared;
-        
+        // Consider the circle's radius in the collision check
+        return distance <= self.Radius;
     }
 
+    private void Update()
+    {
+        _renderer.color = GyzmoColor;
+    }
 }

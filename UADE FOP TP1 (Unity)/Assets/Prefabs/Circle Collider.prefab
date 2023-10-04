@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7350554208792814417
 SpriteRenderer:
@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customCollider: {fileID: 3137084795036760663}
+  _static: 0
   fisicas: {fileID: 708601456006519570}
-  player: 1
+  player: 0
   speed: 10
 --- !u!114 &3137084795036760663
 MonoBehaviour:
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 1696820772262304701}
+  _renderer: {fileID: 7350554208792814417}
   GyzmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   Radius: 1
   CollisionNormal: {x: 0, y: 0}

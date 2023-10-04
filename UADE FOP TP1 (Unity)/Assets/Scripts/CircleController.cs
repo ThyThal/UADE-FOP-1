@@ -33,7 +33,6 @@ public class CircleController : CustomMonoBehaviour
         else if (direction.x != 0 || direction.y != 0)
         {
             fisicas.CustomAddForce(direction.normalized * speed);
-
         }
     }
 }

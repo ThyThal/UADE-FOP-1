@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 1794339045971818267}
+  _renderer: {fileID: 4431428250026274212}
   GyzmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1169497656209715778
 MonoBehaviour:
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customCollider: {fileID: 3384328126166437735}
+  _static: 1
   fisicas: {fileID: 1169497656209715778}
   player: 0
   speed: 10

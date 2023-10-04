@@ -31,11 +31,14 @@ public class GameManager : MonoBehaviour
         for (int i = CustomMonoBehaviours.Count - 1; i >= 0; i--)
         {            
             var otherObject = CustomMonoBehaviours[i];
-            if (otherObject == myCollider.gameObject) continue;
+            if (otherObject.gameObject == myCollider.gameObject) continue;
 
             if (otherObject.isActiveAndEnabled)
             {
-                if (myCollider.CheckCollision(otherObject.CustomCollider));
+                if (otherObject != myCollider.gameObject)
+                {
+                    if (myCollider.CheckCollision(otherObject.CustomCollider));
+                }
             }
         }
     }
