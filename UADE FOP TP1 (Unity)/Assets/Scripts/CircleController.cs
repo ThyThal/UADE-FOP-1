@@ -14,7 +14,10 @@ public class CircleController : CustomMonoBehaviour
     void Update()
     {
         CustomCollider.GyzmoColor = Color.blue;
-        GameManager.Instance.CheckCollisions(CustomCollider);
+        if (!Static)
+        {
+            GameManager.Instance.CheckCollisions(CustomCollider);
+        }
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");

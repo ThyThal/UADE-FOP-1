@@ -15,12 +15,24 @@ public class CustomColliderCircle2D : CustomColliderBase
         switch (other)
         {
             case CustomColliderBox2D boxCollider:
+
+                if(!CollisionCircleBox(this,boxCollider)) return false;
+                GyzmoColor = Color.cyan;
+                //boxCollider.GyzmoColor = Color.green;
+
                 return true;
 
             case CustomColliderCircle2D otherColliderCircle:
-                if (!CollisionCircleCircle(this, otherColliderCircle)) return false;
+                if (!CollisionCircleCircle(this, otherColliderCircle))
+                {
+                    GyzmoColor = Color.cyan;
+                    otherColliderCircle.GyzmoColor = Color.cyan;
+                    return false;
+                }
+
+                    
                 
-                GyzmoColor = Color.cyan;
+                GyzmoColor = Color.green;
                 otherColliderCircle.GyzmoColor = Color.green;
 
                 ResolveCircleCollision(otherColliderCircle);

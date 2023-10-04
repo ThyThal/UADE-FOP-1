@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class CustomColliderBase : MonoBehaviour, ICollider
@@ -59,11 +60,27 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
     {
         return Vector2.Distance(self.Transform.position, other.Transform.position) < self.Radius + other.Radius;
     }
-    
-    /*
-    protected bool CollisionCircleBox()
+
+
+    protected bool CollisionCircleBox(CustomColliderCircle2D self, CustomColliderBox2D other)
     {
-        return false;
+        //Calculate the distance between the circle's center and the square's center
+       
+
+        float dx = transform.position.x - other.transform.position.x;
+        float dy = transform.position.y - other.transform.position.y;
+
+
+
+        // Calculate the squared distance
+        float distanceSquared = (dx * dx) + (dy * dy);
+
+        // Check if the squared distance is less than the squared sum of the radii
+        float combinedRadius = self.Radius + other.transform.localScale.x / 2f; // Assuming square is oriented as a diamond
+        float combinedRadiusSquared = combinedRadius * combinedRadius;
+
+        return distanceSquared < combinedRadiusSquared;
+        
     }
-    */
+
 }

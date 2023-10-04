@@ -17,7 +17,7 @@ public class CustomColliderBox2D : CustomColliderBase
                 if (!CollisionBoxBox(this, otherColliderBox)) return false;
                 
                 GyzmoColor = Color.cyan;
-                otherColliderBox.GyzmoColor = Color.green;
+                //otherColliderBox.GyzmoColor = Color.green;
                 
                 ResolveBoxCollision(otherColliderBox);
                 return true;
