@@ -17,10 +17,7 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
     protected abstract void DrawGizmo();
     protected virtual void OnDrawGizmos()
     {
-        // Set the gizmo color
         Gizmos.color = GyzmoColor;
-
-        // Draw the collider shape gizmo
         DrawGizmo();
     }
     
@@ -44,19 +41,7 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
                 self.Transform.localPosition.y - self.HalfScale.y < other.Transform.localPosition.y + other.HalfScale.y &&
                 self.Transform.localPosition.y + self.HalfScale.y > other.Transform.localPosition.y - other.HalfScale.y );
     }
-    
-    /*
-    protected bool CollisionBoxCircle(CustomColliderBox2D self, CustomColliderCircle2D other)
-    {
-        Vector2 closestPoint = Vector2.Max(self.Transform.position - self.Transform.localScale * 0.5f,
-                            Vector2.Min(other.Transform.position, self.Transform.position + self.Transform.localScale * 0.5f));
 
-        float distance = Vector2.Distance(closestPoint, other.Transform.position);
-
-        return distance <= other.Radius;
-    }
-    */
-    
     protected bool CollisionCircleCircle(CustomColliderCircle2D self, CustomColliderCircle2D other)
     {
         return Vector2.Distance(self.Transform.position, other.Transform.position) < self.Radius + other.Radius;
@@ -65,14 +50,12 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
 
     protected bool CollisionCircleBox(CustomColliderCircle2D self, CustomColliderBox2D other)
     {
-        // Check collision between circle and box
         float closestX = Mathf.Clamp(Transform.position.x, other.Transform.position.x - other.HalfScale.x, other.Transform.position.x + other.HalfScale.x);
         float closestY = Mathf.Clamp(Transform.position.y, other.Transform.position.y - other.HalfScale.y, other.Transform.position.y + other.HalfScale.y);
 
         Vector2 closestPoint = new Vector2(closestX, closestY);
         float distance = Vector2.Distance(Transform.position, closestPoint);
-
-        // Consider the circle's radius in the collision check
+        
         return distance <= self.Radius;
     }
 
