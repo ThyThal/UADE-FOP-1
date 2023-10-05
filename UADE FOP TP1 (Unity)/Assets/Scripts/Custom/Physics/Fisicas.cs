@@ -25,6 +25,13 @@ public class Fisicas : MonoBehaviour
         velocity += acceleration * Time.fixedDeltaTime;
         
     }
+
+    public void CustomDoForce(Vector2 force)
+    {
+        Vector2 acceleration = force / mass;
+        velocity = acceleration;
+    }
+    
     public void CustomAddImpulse(Vector2 impulse)
     {
         // Update velocity using the impulse

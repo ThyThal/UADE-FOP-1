@@ -9,6 +9,7 @@ public class CircleController : CustomMonoBehaviour
     public Fisicas fisicas;
     public bool player = false;
     public float speed = 10f;
+    public bool mruv = false;
 
     // Update is called once per frame
     void Update()
@@ -32,7 +33,8 @@ public class CircleController : CustomMonoBehaviour
 
         else if (direction.x != 0 || direction.y != 0)
         {
-            fisicas.CustomAddForce(direction.normalized * speed);
+            if (mruv) fisicas.CustomAddForce(direction.normalized * speed);
+            else fisicas.CustomDoForce(direction.normalized * speed);
         }
     }
 }
