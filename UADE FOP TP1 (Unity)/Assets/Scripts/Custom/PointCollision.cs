@@ -6,12 +6,24 @@ using UnityEngine;
 public class PointCollision : MonoBehaviour
 {
     public SpriteRenderer _spriteRenderer;
-
+    
     private void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = new Vector3(worldPosition.x, worldPosition.y, 0f);
+
+        if (Input.GetKeyDown("space"))
+        {
+            GameObject bullet = null;
+            bullet = GameManager.Instance.SpawnBullet();
+
+            if (bullet != null)
+            {
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bulletScript.Reset(transform.position);
+            }
+        }
         
         CheckCollision();
     }
@@ -43,7 +55,7 @@ public class PointCollision : MonoBehaviour
 
         if (collide)
         {
-            _spriteRenderer.color = Color.grey;
+            _spriteRenderer.color = Color.magenta;
         }
         else
         {

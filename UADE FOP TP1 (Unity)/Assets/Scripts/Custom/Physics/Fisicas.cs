@@ -9,7 +9,7 @@ public class Fisicas : MonoBehaviour
 
     public float gravityScale = 0.0f;
 
-    private Vector2 gravity = new Vector2(0, -5.8f); // Ajusta la gravedad seg�n tus necesidades
+    private Vector2 gravity = new Vector2(0, -5.8f); // Ajusta la gravedad segun tus necesidades
 
     void FixedUpdate()
     {

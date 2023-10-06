@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
     public Pool _pool;
     [SerializeField] private List<CustomMonoBehaviour> _customMonoBehaviours = new();
 
-    public List<CustomMonoBehaviour> CustomMonoBehaviours => _customMonoBehaviours;
+    public List<CustomMonoBehaviour> CustomMonoBehaviours
+    {
+        get { return _customMonoBehaviours; }
+        private set { _customMonoBehaviours = value; }
+    }
 
     // Game Manager Instance
     public static GameManager Instance;
@@ -41,5 +45,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public GameObject SpawnBullet()
+    {
+        var bullet = _pool.GetObject();
+        return bullet;
     }
 }
