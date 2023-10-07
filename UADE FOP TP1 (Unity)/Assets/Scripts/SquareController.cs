@@ -1,20 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CustomColliderBox2D))]
-[RequireComponent(typeof(Fisicas))]
+[RequireComponent(typeof(CustomPhysics))]
 public class SquareController : CustomMonoBehaviour
 {
-    public Fisicas fisicas;
-    public bool player = false;
-    public float speed = 10f;
+    public bool Player = false;
+    public bool MRUV = false;
+    public bool Stop = false;
 
-    // Update is called once per frame
+    [SerializeField] private CustomPhysics _customPhysics;
+    [SerializeField] private float _speed = 10f;
+
+    private void Awake()
+    {
+        if (_customPhysics == null) { _customPhysics = GetComponent<CustomPhysics>(); }
+    }
+
     void Update()
     {
-        //CustomCollider.GyzmoColor = Color.blue;
+        CustomCollider.GyzmoColor = Color.blue;
+
         if (!Static)
         {
             GameManager.Instance.CheckCollisions(CustomCollider);
@@ -24,17 +29,18 @@ public class SquareController : CustomMonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
 
-        if (!player) return;
+        if (!Player) return;
 
-        if (direction == Vector2.zero) 
-        { 
-            fisicas.Stop(); 
+        if (direction == Vector2.zero && Stop)
+        {
+            _customPhysics.StopVelocity();
+            _customPhysics.StopAcceleration();
         }
 
         else if (direction.x != 0 || direction.y != 0)
         {
-            fisicas.CustomAddForce(direction.normalized * speed);
-
+            if (MRUV) _customPhysics.CustomAddForce(direction.normalized * _speed);
+            else _customPhysics.CustomDoForce(direction.normalized * _speed);
         }
     }
 }

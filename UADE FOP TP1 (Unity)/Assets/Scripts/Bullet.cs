@@ -1,11 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : CustomMonoBehaviour
 {
-    public Fisicas fisicas;
-    public float speed = 10;
+    [SerializeField] private CustomPhysics _customPhysics;
+    [SerializeField] private float _speed = 10;
+
+    private void Awake()
+    {
+        if (_customPhysics == null) { _customPhysics = GetComponent<CustomPhysics>(); }
+    }
 
     void Spawn()
     {
@@ -23,12 +27,13 @@ public class Bullet : CustomMonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
     // Update is called once per frame
     void Update()
     {
         if (!Static)
         {
-            fisicas.CustomDoForce(Vector2.up * speed);
+            _customPhysics.CustomDoForce(Vector2.up * _speed);
         }
     }
 

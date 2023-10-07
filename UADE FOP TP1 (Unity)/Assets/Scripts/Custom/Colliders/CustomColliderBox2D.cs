@@ -12,7 +12,6 @@ public class CustomColliderBox2D : CustomColliderBase
 
         switch (_otherCollider)
         {
-            // Other Collider Box.
             case CustomColliderBox2D otherColliderBox:
                 if (!CollisionBoxBox(this, otherColliderBox))
                 {
@@ -21,7 +20,6 @@ public class CustomColliderBox2D : CustomColliderBase
 
                 return true;
             
-            // Other Collider Sphere.
             case CustomColliderCircle2D otherColliderSphere:
                 if (!CheckCollisionWithSphere(otherColliderSphere))
                 {
@@ -46,39 +44,12 @@ public class CustomColliderBox2D : CustomColliderBase
         // Lazy computation
         if (circle2DCollider == null) return false;
 
-        Vector2 closestPoint = Vector2.Max(Transform.position - Transform.localScale * 0.5f,
-                               Vector2.Min(circle2DCollider.Transform.position, Transform.position + Transform.localScale * 0.5f));
+        Vector2 closestPoint = Vector2.Max(Position2D - HalfScale,
+                               Vector2.Min(circle2DCollider.Position2D, Position2D + HalfScale));
 
-        float distance = Vector2.Distance(closestPoint, circle2DCollider.Transform.position);
+        float distance = Vector2.Distance(closestPoint, circle2DCollider.Position2D);
 
         return distance <= circle2DCollider.Radius;
-    }
-    
-    private Vector2 GetClosestPointOnBox(CustomColliderBox2D box2DCollider, Vector2 point)
-    {
-        Vector2 boxCenter = box2DCollider.Transform.position;
-        Vector2 boxSize = Transform.localScale;
-        Vector2 halfExtents = boxSize * 0.5f;
-        Vector2 direction = point - boxCenter;
-        Vector2 clampedDirection = new Vector2(
-            Mathf.Clamp(direction.x, -halfExtents.x, halfExtents.x),
-            Mathf.Clamp(direction.y, -halfExtents.y, halfExtents.y)
-        );
-
-        Vector2 closestPoint = boxCenter + clampedDirection;
-
-        return closestPoint;
-    }
-
-    private void ResolveBoxCollision(CustomColliderBox2D otherColliderBox2D)
-    {
-        Vector2 collisionNormal = Transform.position - otherColliderBox2D.Transform.position;
-        float penetrationDepth = Mathf.Abs(Transform.position.x - otherColliderBox2D.Transform.position.x) - (Transform.localScale.x + otherColliderBox2D.Transform.localScale.x) / 2;
-
-        float separationDistance = penetrationDepth + 0.001f;
-        Vector3 correction = new Vector3(separationDistance * collisionNormal.x, 0, 0);
-
-        Transform.position -= correction;
     }
 
     protected override void DrawGizmo()

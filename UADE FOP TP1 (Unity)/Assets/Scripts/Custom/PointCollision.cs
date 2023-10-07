@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class PointCollision : MonoBehaviour
 {
-    public SpriteRenderer _spriteRenderer;
-    
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
         Vector3 mousePosition = Input.mousePosition;

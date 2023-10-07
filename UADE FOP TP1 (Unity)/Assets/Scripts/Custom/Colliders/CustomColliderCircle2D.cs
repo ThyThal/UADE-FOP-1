@@ -3,7 +3,7 @@ using UnityEngine;
 public class CustomColliderCircle2D : CustomColliderBase
 {
     [SerializeField] public float Radius = 0.5f;
-    [SerializeField] public Vector2 CollisionNormal;
+    [SerializeField] private Vector2 _collisionNormal;
     
     // Cache other collider.
     private ICollider _otherCollider;
@@ -12,25 +12,29 @@ public class CustomColliderCircle2D : CustomColliderBase
     {
         _otherCollider = other;
         
-        switch (other)
+        switch (_otherCollider)
         {
             case CustomColliderBox2D boxCollider:
                 if (!CollisionCircleBox(this, boxCollider))
                 {
-                    boxCollider.GyzmoColor = Color.cyan;
                     return false;
                 }
 
-                GyzmoColor = Color.green;
-                boxCollider.GyzmoColor = Color.magenta;
+                if (boxCollider.GetComponent<CustomMonoBehaviour>().Static == true) { boxCollider.GyzmoColor = Color.yellow; }
+                else { boxCollider.GyzmoColor = Color.grey; }                
+                GyzmoColor = Color.cyan;
+
                 return true;
 
             case CustomColliderCircle2D otherColliderCircle:
                 if (!CollisionCircleCircle(this, otherColliderCircle)) return false;
 
-                GyzmoColor = Color.green;
-                otherColliderCircle.GyzmoColor = Color.red;
+                if (otherColliderCircle.GetComponent<CustomMonoBehaviour>().Static == true) { otherColliderCircle.GyzmoColor = Color.yellow; }
+                else { otherColliderCircle.GyzmoColor = Color.cyan; }
+                GyzmoColor = Color.cyan;
+
                 ResolveCircleCollision(otherColliderCircle);
+
                 return true;
             
             default:

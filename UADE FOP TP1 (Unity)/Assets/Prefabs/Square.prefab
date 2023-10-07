@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1794339045971818267}
   - component: {fileID: 4431428250026274212}
+  - component: {fileID: 4358083722891555216}
   - component: {fileID: 3384328126166437735}
   - component: {fileID: 1169497656209715778}
-  - component: {fileID: 4358083722891555216}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4431428250026274212
 SpriteRenderer:
@@ -87,36 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3384328126166437735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263146935407113379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07ab74304c421544aeeb2cef77c51b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transform: {fileID: 1794339045971818267}
-  _renderer: {fileID: 4431428250026274212}
-  GyzmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
---- !u!114 &1169497656209715778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263146935407113379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e54b86c835146443908a7f838076f0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 1
-  velocity: {x: 0, y: 0}
-  gravityScale: 0
 --- !u!114 &4358083722891555216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +101,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customCollider: {fileID: 3384328126166437735}
   _static: 1
-  fisicas: {fileID: 1169497656209715778}
-  player: 0
-  speed: 10
+  Player: 0
+  MRUV: 0
+  Stop: 0
+  _customPhysics: {fileID: 1169497656209715778}
+  _speed: 10
+--- !u!114 &3384328126166437735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263146935407113379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07ab74304c421544aeeb2cef77c51b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GyzmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _transform: {fileID: 1794339045971818267}
+  _renderer: {fileID: 4431428250026274212}
+--- !u!114 &1169497656209715778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263146935407113379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e54b86c835146443908a7f838076f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mass: 1
+  GravityScale: 0
+  _velocity: {x: 0, y: 0}
+  _acceleration: {x: 0, y: 0}
+  _gravity: {x: 0, y: -9.8}

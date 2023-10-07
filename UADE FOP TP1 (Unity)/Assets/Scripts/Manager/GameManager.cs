@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             {
                 if (otherObject != myCollider.gameObject)
                 {
-                    if (myCollider.CheckCollision(otherObject.CustomCollider));
+                    myCollider.CheckCollision(otherObject.CustomCollider);
                 }
             }
         }
