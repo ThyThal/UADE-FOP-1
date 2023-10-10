@@ -39,7 +39,7 @@ public class CircleController : CustomMonoBehaviour
 
         else if (direction.x != 0 || direction.y != 0)
         {
-            if (MRUV) _customPhysics.CustomAddForce(direction.normalized * _speed);
+            if (MRUV) _customPhysics.ApplyForce(direction.normalized * _speed);
             else _customPhysics.CustomDoForce(direction.normalized * _speed);
         }
     }

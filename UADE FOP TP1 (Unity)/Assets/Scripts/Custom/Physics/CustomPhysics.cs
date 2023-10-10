@@ -12,13 +12,14 @@ public class CustomPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        _velocity += _acceleration * Time.fixedDeltaTime;
-        transform.position += (Vector3)_velocity * Time.fixedDeltaTime;        
-    }   
+        _velocity += _acceleration * Time.deltaTime;
+        transform.position += (Vector3)(_velocity * Time.deltaTime + (_acceleration * 0.5f * Time.deltaTime * Time.deltaTime));
+        _acceleration = Vector2.zero;   
+    }
 
-    public void CustomAddForce(Vector2 force)
+    public void ApplyForce(Vector2 force)
     {
-        _acceleration = force / Mass;
+        _acceleration += force / Mass;
     }
 
     public void CustomDoForce(Vector2 force)
