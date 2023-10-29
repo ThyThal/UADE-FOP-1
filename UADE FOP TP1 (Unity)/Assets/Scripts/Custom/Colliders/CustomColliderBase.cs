@@ -28,7 +28,7 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
     }
 
     public Vector2 HalfScale => Transform.localScale / 2f;
-
+    // Colision entre cubo y cubo
     protected bool CollisionBoxBox(CustomColliderBox2D self, CustomColliderBox2D other)
     {
         return (self.Position2D.x - self.HalfScale.x < other.Position2D.x + other.HalfScale.x &&
@@ -42,7 +42,7 @@ public abstract class CustomColliderBase : MonoBehaviour, ICollider
         return Vector2.Distance(self.Position2D, other.Position2D) < self.Radius + other.Radius;
     }
 
-
+    // Colision entre cubo y circulo
     protected bool CollisionCircleBox(CustomColliderCircle2D self, CustomColliderBox2D other)
     {
         float closestX = Mathf.Clamp(Position2D.x, other.Position2D.x - other.HalfScale.x, other.Position2D.x + other.HalfScale.x);

@@ -5,9 +5,9 @@ public class CustomColliderCircle2D : CustomColliderBase
     [SerializeField] public float Radius = 0.5f;
     [SerializeField] private Vector2 _collisionNormal;
     
-    // Cache other collider.
+    // Cache 
     private ICollider _otherCollider;
-    
+    // Chequeo de collisiones
     public override bool CheckCollision(ICollider other)
     {
         _otherCollider = other;
@@ -45,25 +45,27 @@ public class CustomColliderCircle2D : CustomColliderBase
 
     protected override void DrawGizmo()
     {
-        // Get the center position of the collider
+        // Da la posicion de la colision
         var center = Transform.position;
 
-        // Draw the wire sphere representing the sphere collider
+        // Da color a la colision del circulo
         Gizmos.DrawWireSphere(center, Radius);
     }
 
     public void ResolveCircleCollision(CustomColliderCircle2D other)
     {
-        // Calculate the vector between the centers of the two circles
+        // Calcula el vector entre los centros de los dos circulos
         Vector2 collisionVector = other.Position2D - Position2D;
-    
-        // Calculate the distance between the centers of the two circles
+
+        // Calcula la distancia entre los centros de los dos circulos
         float distance = collisionVector.magnitude;
-    
-        // Calculate the amount of overlap
+
+        // Calcular la cantidad de superposicion
+
         float overlap = Radius + other.Radius - distance;
-    
-        // If there's overlap, move the circles apart
+ 
+        // Si hay superposicion que separe los circulos
+
         if (overlap > 0)
         {
             collisionVector.Normalize();

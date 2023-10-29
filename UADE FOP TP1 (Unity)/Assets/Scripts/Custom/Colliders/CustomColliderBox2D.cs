@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CustomColliderBox2D : CustomColliderBase
 {
-    // Cache other collider.
+    // Cache
     private ICollider _otherCollider;
 
-    // Check Collision with Others.
+    // Chequeo de colisiones con los otros
     public override bool CheckCollision(ICollider other)
     {
         _otherCollider = other;
@@ -54,10 +54,10 @@ public class CustomColliderBox2D : CustomColliderBase
 
     protected override void DrawGizmo()
     {
-        // Get the center position of the collider
+        // Da la pocision central de la colision
         Vector2 center = Transform.position;
 
-        // Draw the wire cube representing the box collider
+        // Da color a la colision del cubo
         Gizmos.DrawWireCube(center, Transform.localScale);
     }
 }

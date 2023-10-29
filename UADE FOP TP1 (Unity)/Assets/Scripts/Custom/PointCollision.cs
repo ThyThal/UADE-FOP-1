@@ -32,7 +32,7 @@ public class PointCollision : MonoBehaviour
         
         CheckCollision();
     }
-
+    // Chequeo de las colisiones
     private void CheckCollision()
     {
         var collide = false;
@@ -84,7 +84,7 @@ public class PointCollision : MonoBehaviour
             return false;
         }
     }
-
+    // Colision circulo
     private bool PointCircleCollision(CustomColliderCircle2D circle)
     {
         float deltaX = transform.position.x - circle.transform.position.x;

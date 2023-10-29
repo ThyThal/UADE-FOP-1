@@ -28,7 +28,7 @@ public class Bullet : CustomMonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+    // Actualiza la posicion de las balas
     void Update()
     {
         if (!Static)

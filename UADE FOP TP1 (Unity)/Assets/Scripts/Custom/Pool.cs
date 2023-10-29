@@ -12,7 +12,7 @@ public class Pool : MonoBehaviour
     {
         InitializePool();
     }
-
+    // Pool de objetos
     public void InitializePool()
     {
         for (int i = 0; i < poolSize; i++)
