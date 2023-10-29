@@ -460,6 +460,10 @@ PrefabInstance:
       propertyPath: player
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 708601456006519570, guid: 63bb7692b2c8cc84eaa18df0af1f8a84, type: 3}
+      propertyPath: _friction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1696820772262304701, guid: 63bb7692b2c8cc84eaa18df0af1f8a84, type: 3}
       propertyPath: m_RootOrder
       value: 2
