@@ -33,7 +33,7 @@ public class Bullet : CustomMonoBehaviour
     {
         if (!Static)
         {
-            _customPhysics.CustomDoForce(Vector2.up * _speed);
+            //_customPhysics.CustomDoForce(Vector2.up * _speed);
         }
     }
 
